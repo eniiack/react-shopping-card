@@ -1,26 +1,12 @@
 import {Link} from "react-router-dom";
 import MinesCartButton from "./buttons/MinesCartButton.jsx";
 import AddToCartButton from "./buttons/AddToCartButton.jsx";
-import {useContext, useMemo} from "react";
-import {CardContext} from "../context/CardContext.jsx";
-import useAddToCart from "../hooks/useAddToCart.jsx";
-import useMinesCart from "../hooks/useMinesCart.jsx";
-
-export default function Cart({product}){
-    const {cartItems , setCartItems} = useContext(CardContext)
-
-    const { addToCart } = useAddToCart(cartItems, setCartItems);
-    const { minesCart } = useMinesCart(cartItems, setCartItems);
-
-    const count = useMemo(()=>{
-        return cartItems.find(item => item?.id === product?.id)?.count || 0;
-    },[cartItems, product?.id])
+import {memo} from "react";
 
 
+const Cart = ({product , addToCart , minesCart , count}) => {
 
 
-
-    // let count = cartItems.find(item => item?.id === product?.id)?.count || 0;
     return (
         <div
             className="bg-white rounded-xl shadow p-4 flex flex-col items-center gap-3"
@@ -54,3 +40,8 @@ export default function Cart({product}){
         </div>
     )
 }
+
+export default memo(Cart, (prev, next) => {
+    return prev.count === next.count &&
+        prev.product.id === next.product.id;
+});

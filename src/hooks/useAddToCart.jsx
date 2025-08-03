@@ -1,9 +1,9 @@
-// useAddToCart.js
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 
 export default function useAddToCart(cartItems, setCartItems) {
-    const addToCart = (post, productId) => {
+    const addToCart = useCallback((post, productId) => {
         const itemExists = cartItems.some((item) => item.id === post?.id);
+
         if (itemExists) {
             const updatedCart = cartItems.map((item) =>
                 item.id === post?.id
@@ -25,8 +25,7 @@ export default function useAddToCart(cartItems, setCartItems) {
                 },
             ]);
         }
-    };
-
+    }, [cartItems, setCartItems]);
 
     useEffect(() => {
         if (cartItems.length > 0) {

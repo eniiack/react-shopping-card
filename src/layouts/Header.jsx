@@ -13,6 +13,7 @@ export default function Header() {
     const navigation = [
         { name: "Home", href: "/", current: true },
         { name: "Products", href: "/products", current: false },
+        { name: "Products-Detail", href: "/products/:productId", current: false }
     ];
 
     const {addToCart}  = useAddToCart(cartItems, setCartItems);

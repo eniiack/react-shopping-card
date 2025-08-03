@@ -1,5 +1,7 @@
+import {useCallback} from "react";
+
 export default function UseMinesCart(cartItems , setCartItems){
-    const minesCart = (product , count) => {
+    const minesCart = useCallback((product , count) => {
         const itemExists = cartItems.some(item => item.id === product?.id);
 
         if (itemExists) {
@@ -17,6 +19,6 @@ export default function UseMinesCart(cartItems , setCartItems){
                 setCartItems(deleteCart)
             }
         }
-    }
+    })
     return {minesCart};
 }
