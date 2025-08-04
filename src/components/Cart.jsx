@@ -2,15 +2,14 @@ import {Link} from "react-router-dom";
 import MinesCartButton from "./buttons/MinesCartButton.jsx";
 import AddToCartButton from "./buttons/AddToCartButton.jsx";
 import {memo} from "react";
+import SharedCardLayout from "./SharedCardLayout.jsx";
 
 
 const Cart = ({product , addToCart , minesCart , count}) => {
 
 
     return (
-        <div
-            className="bg-white rounded-xl shadow p-4 flex flex-col items-center gap-3"
-        >
+        <SharedCardLayout>
             <Link
                 to={`/products/${product.id}`}
                 className="w-full flex flex-col items-center"
@@ -37,7 +36,7 @@ const Cart = ({product , addToCart , minesCart , count}) => {
                 <AddToCartButton className=" cursor-pointer bg-green-500 text-white w-8 h-8 rounded hover:bg-green-600"
                                  onClick={()=>addToCart(product , product?.id)}  />
             </div>
-        </div>
+        </SharedCardLayout>
     )
 }
 
